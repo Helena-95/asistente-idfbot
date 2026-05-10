@@ -2,3 +2,5 @@ streamlit
 google-generativeai
 pandas
 st-gsheets-connection
+requests
+beautifulsoup4
