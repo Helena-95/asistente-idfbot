@@ -243,7 +243,7 @@ elif st.session_state.autenticado:
     elif st.session_state.mode == "Resolver Ejercicios":
         st.write("Introduce los datos del ejercicio y especifica qué necesitas resolver.")
         
-        # Selector de tipo de ejercicio (Mantiene tu estructura original)
+        # Selector de tipo de ejercicio
         tipo_ejercicio = st.radio("Selecciona el tipo de ejercicio:", ["Proyecto de Inversión", "Bono Financiero"], horizontal=True)
 
         st.subheader("1. Introduce los Datos del Ejercicio")
@@ -257,7 +257,6 @@ elif st.session_state.autenticado:
             df = pd.DataFrame([{"Año": 1, "Proyecto A": 60000, "Proyecto B": 121000}, {"Año": 2, "Proyecto A": 72000, "Proyecto B": 0}])
             edited_df = st.data_editor(df, num_rows="dynamic", key="cashflow_data")
         else:
-            # Campos específicos para el BONO
             col_b1, col_b2 = st.columns(2)
             nominal = col_b1.number_input("Valor Nominal (€)", value=1000)
             cupon_p = col_b2.number_input("Cupón Anual (%)", value=5.0)
@@ -265,14 +264,21 @@ elif st.session_state.autenticado:
             plazo_b = st.slider("Años hasta vencimiento", 1, 30, 5)
 
         st.subheader("2. ¿Qué necesitas que resuelva?")
-        # Instrucción por defecto según el tipo
         default_instr = "Calcula el VAN, la TIR y el Payback Descontado de ambos proyectos." if tipo_ejercicio == "Proyecto de Inversión" else "Calcula la TIR del bono desglosando la rentabilidad explícita e implícita."
         user_instruction = st.text_area("Instrucciones para el asistente:", value=default_instr)
         
         st.subheader("3. Elige un Método de Resolución")
         col_mano, col_excel = st.columns(2)
-        solve_mano_button = col_mano.button("✍️ Resolver a Mano")
-        solve_excel_button = col_excel.button("📊 Resolver con Excel")
+        
+        # Botones de Proyecto
+        if tipo_ejercicio == "Proyecto de Inversión":
+            solve_mano_button = col_mano.button("✍️ Resolver a Mano")
+            solve_excel_button = col_excel.button("📊 Resolver con Excel")
+        else:
+            # Para el BONO: Solo activamos "A Mano" y desactivamos/avisamos sobre Excel
+            solve_mano_button = col_mano.button("✍️ Resolver a Mano")
+            col_excel.info("📊 Opción Excel no disponible para bonos temporalmente.")
+            solve_excel_button = False
 
         def build_prompt(method_name, instruction):
             prompt = f"Por favor, usando tu metodología de '{method_name}' y basándote en los siguientes datos, realiza esta tarea específica: '{instruction}'.\n\n"
@@ -283,58 +289,52 @@ elif st.session_state.autenticado:
                 prompt += f"Datos del Bono:\n- Valor Nominal: {nominal}€\n- Cupón: {cupon_p}%\n- Precio: {precio_c}€\n- Plazo: {plazo_b} años\n"
             return prompt
 
+        # --- REGLA ANTICÓDIGO LaTeX (PROMPT DEL SISTEMA) ---
+        REGLA_FORMATO = """
+        IMPORTANTE (REGLA DE FORMATO): 
+        - NO utilices comandos de estructura de documento LaTeX (como \\documentclass, \\begin{document}, \\section, etc.). 
+        - Escribe tu respuesta en Markdown normal y limpio. 
+        - Encierra las fórmulas matemáticas EXCLUSIVAMENTE entre signos de dólar ($...$ para línea y $$...$$ para bloques). 
+        - No generes un archivo .tex, genera una respuesta de chat legible.
+        """
+
         prompt_text = None
         
-        # --- LÓGICA BOTÓN: A MANO ---
         if solve_mano_button:
             current_mode_key = "A Mano"
             st.session_state.sub_mode = current_mode_key
             
             if tipo_ejercicio == "Proyecto de Inversión":
                 archivos = ["tema_1.pdf", "tema_2.pdf", "ejercicos_resueltos_a_mano_tema_2.pdf"]
-                sys_msg = "Eres un tutor experto que resuelve ejercicios de inversión a mano. Sigue fielmente 'ejercicos_resueltos_a_mano_tema_2.pdf'."
+                sys_msg = "Eres un tutor experto que resuelve a mano siguiendo 'ejercicos_resueltos_a_mano_tema_2.pdf'."
             else:
-                # CAMBIO AQUÍ: Ahora lee Tema 3 para los Bonos
                 archivos = ["tema_3.pdf", "ejercicos_resueltos_a_mano_tema_3.pdf"]
-                sys_msg = "Eres un tutor experto que resuelve ejercicios de inversión a mano. Sigue fielmente 'ejercicos_resueltos_a_mano_tema_2.pdf'."
+                sys_msg = "Eres experto en bonos. Desglosa Rentabilidad EXPLÍCITA e IMPLÍCITA siguiendo 'ejercicos_resueltos_a_mano_tema_3.pdf'."
             
-            iniciar_chat(files_to_load=archivos, system_prompt={"text": sys_msg + " Usa LaTeX"})
+            iniciar_chat(files_to_load=archivos, system_prompt={"text": sys_msg + REGLA_FORMATO})
             prompt_text = build_prompt("A Mano", user_instruction)
 
-        # --- LÓGICA BOTÓN: EXCEL ---
         if solve_excel_button:
             current_mode_key = "Con Excel"
             st.session_state.sub_mode = current_mode_key
+            archivos = ["tema_1.pdf", "tema_2.pdf", "ejercicos_resueltos_excel_tema_2.pdf"]
+            sys_msg = "Eres un tutor de Excel siguiendo 'ejercicos_resueltos_excel_tema_2.pdf'."
             
-            if tipo_ejercicio == "Proyecto de Inversión":
-                archivos = ["tema_1.pdf", "tema_2.pdf", "ejercicos_resueltos_excel_tema_2.pdf"]
-                sys_msg = "Eres un experto que enseña a resolver proyectos en Excel usando 'ejercicos_resueltos_excel_tema_2.pdf'."
-            else:
-                # CAMBIO AQUÍ: Ahora lee Tema 3 para los Bonos
-                archivos = ["tema_3.pdf", "ejercicos_resueltos_a_mano_tema_3.pdf"]
-                sys_msg = "Eres un experto que enseña a resolver bonos en Excel. Explica cómo calcular rentabilidad EXPLÍCITA e IMPLÍCITA con funciones de Excel, basándote en la teoría del Tema 3."
-                
-            iniciar_chat(files_to_load=archivos, system_prompt={"text": sys_msg + " Indica fórmulas claras"})
+            iniciar_chat(files_to_load=archivos, system_prompt={"text": sys_msg + REGLA_FORMATO})
             prompt_text = build_prompt("Con Excel", user_instruction)
 
-        # --- PROCESAMIENTO DE LA RESPUESTA ---
+        # --- PROCESAMIENTO DE RESPUESTA ---
         if prompt_text:
             history = st.session_state.histories[current_mode_key]
-            datos_txt = edited_df.to_string(index=False) if tipo_ejercicio == "Proyecto de Inversión" else f"Nominal: {nominal}, Precio: {precio_c}, Cupón: {cupon_p}%"
-            user_question = f"**Tarea:** {user_instruction}\n\n**Datos:**\n{datos_txt}"
+            datos_h = edited_df.to_string(index=False) if tipo_ejercicio == "Proyecto de Inversión" else f"Nominal: {nominal}, Precio: {precio_c}"
+            user_question = f"**Tarea:** {user_instruction}\n\n**Datos:**\n{datos_h}"
             
             history.append({"role": "user", "content": user_question})
-            with st.spinner("Analizando tu petición..."):
+            with st.spinner("Generando resolución paso a paso..."):
                 response = st.session_state.chat.send_message(prompt_text)
                 assistant_response = response.text
-                guardar_en_sheets(
-                    st.session_state.nombre, 
-                    st.session_state.email, 
-                    st.session_state.codigo, 
-                    tipo=f"Ejercicio: {current_mode_key} ({tipo_ejercicio})", 
-                    pregunta=user_instruction, 
-                    respuesta=assistant_response
-                )
+                guardar_en_sheets(st.session_state.nombre, st.session_state.email, st.session_state.codigo, 
+                                 tipo=f"Ejercicio: {current_mode_key}", pregunta=user_instruction, respuesta=assistant_response)
                 history.append({"role": "assistant", "content": assistant_response})
                 save_conversation(st.session_state.email, current_mode_key, history)
                 st.rerun()
