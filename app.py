@@ -291,7 +291,7 @@ elif st.session_state.autenticado:
             st.session_state.sub_mode = current_mode_key
             
             if tipo_ejercicio == "Proyecto de Inversión":
-                archivos = ["tema_1.pdf", "tema_2.pdf", "ejercicos_resueltos_a_mano_tema_2.pdf""]
+                archivos = ["tema_1.pdf", "tema_2.pdf", "ejercicos_resueltos_a_mano_tema_2.pdf"]
                 sys_msg = "Eres un tutor experto que resuelve ejercicios de inversión a mano. Sigue fielmente 'ejercicos_resueltos_a_mano_tema_2.pdf'."
             else:
                 # CAMBIO AQUÍ: Ahora lee Tema 3 para los Bonos
