@@ -178,7 +178,7 @@ elif st.session_state.autenticado:
         
         try:
             # Asegúrate de usar 1.5-pro
-            model = genai.GenerativeModel("gemini-1.5-pro")
+            model = genai.GenerativeModel("gemini-2.5-pro")
             st.session_state.chat = model.start_chat(
                 history=[{"role": "user", "parts": prompt_parts},
                         {"role": "model", "parts": [{"text": "He analizado el PDF y la web de la UMH. Estoy listo."}]}]
