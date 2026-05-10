@@ -33,7 +33,7 @@ os.makedirs(CONVERSATIONS_DIR, exist_ok=True)
 
 def guardar_en_sheets(nombre, email, codigo, tipo="Acceso", pregunta="", respuesta=""):
     # Leer datos actuales
-    existing_data = conn.read(worksheet="Sheet1")
+    existing_data = conn.read(worksheet="Registro")
     
     # Crear nueva fila
     new_row = pd.DataFrame([{
