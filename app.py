@@ -340,12 +340,28 @@ elif st.session_state.autenticado:
                 st.rerun()
 
         st.markdown("---")
-        st.subheader("Historial de Ejercicios Resueltos")
+        st.subheader("📁 Archivo de Ejercicios Guardados")
+        
         if st.session_state.sub_mode:
             current_mode_key = st.session_state.sub_mode
-            for message in st.session_state.histories.get(current_mode_key, []):
-                 with st.chat_message(message["role"]):
-                    st.markdown(message["content"])
+            historial = st.session_state.histories.get(current_mode_key, [])
+            
+            # Recorremos el historial de 2 en 2 (Pregunta + Respuesta)
+            # Empezamos desde el final para que el más reciente salga arriba
+            for i in range(len(historial)-2, -1, -2):
+                pregunta = historial[i]["content"]
+                respuesta = historial[i+1]["content"]
+                
+                # Creamos un "cajón" plegable para cada ejercicio
+                # El título del cajón será un resumen de la pregunta
+                titulo_ejercicio = pregunta.split('\n')[0].replace('**Tarea:**', '')
+                
+                with st.expander(f"📋 Ejercicio: {titulo_ejercicio[:60]}..."):
+                    st.info("**Tu consulta original:**")
+                    st.write(pregunta)
+                    st.markdown("---")
+                    st.success("**Resolución del Asistente:**")
+                    st.markdown(respuesta)
     
     # --- INTERFAZ DE CHAT UNIFICADA (para Guía y Temario) ---
     if current_mode_key and st.session_state.mode in ["Guía Docente", "Temario del Curso"]:
