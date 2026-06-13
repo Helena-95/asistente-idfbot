@@ -121,7 +121,7 @@ if not st.session_state.autenticado:
     
     if st.sidebar.button("Entrar"):
         if nombre_usuario and email_usuario and codigo_asignatura:
-            if codigo_asignatura in ["1500", "2165"]:
+            if codigo_asignatura in ["1500", "2165", "0000"]:
                 st.session_state.nombre = nombre_usuario
                 st.session_state.email = email_usuario
                 st.session_state.codigo = codigo_asignatura
