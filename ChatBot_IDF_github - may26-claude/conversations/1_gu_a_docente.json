@@ -1,0 +1,14 @@
+[
+    {
+        "role": "assistant",
+        "content": "Hola, he estudiado la Gu\u00eda Docente. \u00bfQu\u00e9 quieres saber sobre ella?"
+    },
+    {
+        "role": "user",
+        "content": "cuantos examenes hay?"
+    },
+    {
+        "role": "assistant",
+        "content": "El alumno realizar\u00e1 un \u00fanico examen final.\n"
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "role": "assistant",
+        "content": "Hola, he estudiado los res\u00famenes de los 5 temas de la asignatura. \u00bfSobre qu\u00e9 tienes dudas?"
+    },
+    {
+        "role": "user",
+        "content": "dame la f\u00f3rmula de TIR"
+    },
+    {
+        "role": "assistant",
+        "content": "La TIR (Tasa Interna de Retorno) es la tasa de descuento que hace que el VAN (Valor Actual Neto) de un proyecto sea igual a cero.  No existe una f\u00f3rmula expl\u00edcita para calcular la TIR.  Se debe hallar por aproximaci\u00f3n o iteraci\u00f3n, ya sea manualmente o utilizando software financiero como Excel, calculadoras financieras o software especializado.\n\nLa ecuaci\u00f3n que se debe resolver para hallar la TIR es:\n\n```\n0 = -Inversi\u00f3n Inicial + \u03a3 [Flujo de Caja del Per\u00edodo t / (1 + TIR)^t]\n```\n\nDonde:\n\n* **Inversi\u00f3n Inicial:** es el desembolso inicial del proyecto.\n* **Flujo de Caja del Per\u00edodo t:** es el flujo de caja neto (ingresos menos egresos) del per\u00edodo t.\n* **t:** es el per\u00edodo de tiempo.\n* **TIR:** es la Tasa Interna de Retorno (la inc\u00f3gnita).\n\n**M\u00e9todos para calcular la TIR:**\n\n* **Prueba y error (tanteo):** Se prueban diferentes tasas de descuento hasta encontrar una que haga que el VAN se acerque lo m\u00e1s posible a cero.\n* **Interpolaci\u00f3n lineal:** Si se conocen dos tasas de descuento que produzcan un VAN positivo y uno negativo, se puede utilizar la interpolaci\u00f3n lineal para estimar la TIR.\n* **Software financiero:**  La forma m\u00e1s eficiente y precisa es usar una funci\u00f3n como `TIR` en Excel u otras herramientas financieras.\n\n**Limitaciones de la TIR:**\n\nA pesar de su utilidad, la TIR tiene algunas limitaciones:\n\n* **Proyectos con flujos de caja no convencionales:** En proyectos con flujos de caja que cambian de signo m\u00e1s de una vez (por ejemplo, inversi\u00f3n inicial, flujos positivos, luego una gran inversi\u00f3n y luego m\u00e1s flujos positivos), puede haber m\u00faltiples TIR o ninguna TIR real.\n* **Supuesto de reinversi\u00f3n:** La TIR asume que los flujos de caja intermedios se reinvierten a la misma tasa que la TIR, lo que puede no ser realista.\n* **Comparaci\u00f3n de proyectos con diferente escala:** La TIR no considera la escala de la inversi\u00f3n. Un proyecto con una TIR alta pero una inversi\u00f3n inicial peque\u00f1a puede generar menos valor absoluto que un proyecto con una TIR m\u00e1s baja pero una inversi\u00f3n inicial mayor.\n\n\nPor lo tanto, si bien la TIR es una herramienta \u00fatil para la evaluaci\u00f3n de proyectos, se debe usar con precauci\u00f3n y en conjunto con otros m\u00e9todos, como el VAN, para tomar decisiones de inversi\u00f3n informadas.\n"
+    },
+    {
+        "role": "user",
+        "content": "dame la formula de TIR"
+    },
+    {
+        "role": "assistant",
+        "content": "La f\u00f3rmula de la TIR (Tasa Interna de Retorno) se define como la tasa de descuento $r$ que hace que el VAN (Valor Actual Neto) de una inversi\u00f3n sea igual a cero.  Se expresa de la siguiente manera:\n\n$$ 0 = -D + \\sum_{t=1}^{n} \\frac{F_t}{(1+r)^t} $$\n\nDonde:\n\n* $D$ es el desembolso inicial.\n* $F_t$ son los flujos netos de caja en cada per\u00edodo $t$.\n* $n$ es el n\u00famero de per\u00edodos.\n\n\nAlternativamente, considerando los cobros ($C_t$) y los pagos ($P_t$) por separado:\n\n$$ 0 = \\sum_{t=0}^{n} \\frac{C_t}{(1+r)^t} - \\sum_{t=0}^{n} \\frac{P_t}{(1+r)^t} $$\n"
+    }
+]

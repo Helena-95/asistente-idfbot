@@ -1,0 +1,22 @@
+[
+    {
+        "role": "assistant",
+        "content": "Hola, he estudiado los res\u00famenes de los temas. \u00bfSobre qu\u00e9 tienes dudas?"
+    },
+    {
+        "role": "user",
+        "content": "Que es TIR?"
+    },
+    {
+        "role": "assistant",
+        "content": "Seg\u00fan el Tema 2, la Tasa Interna de Rentabilidad (TIR) se define como aquella tasa de actualizaci\u00f3n o de descuento ($r$) que hace cero la rentabilidad absoluta neta de la inversi\u00f3n.  Es decir, aquella tasa de descuento que iguala el valor actual de la corriente de cobros con el valor actual de la corriente de pagos. En otras palabras, es la tasa cuyo Valor Actual Neto (VAN) es cero.\n\nMatem\u00e1ticamente, el criterio TIR se expresa como:\n\n$$ 0 = -D + \\sum_{i=1}^{n} \\frac{F_i}{(1+TIR)^i} $$\n\nDonde:\n* $D$ es el desembolso inicial\n* $F_i$ son los flujos netos de caja de cada periodo\n* $n$ es el n\u00famero de periodos\n\nAlternativamente, se puede expresar como:\n\n$$ 0 = \\sum_{i=0}^{n} \\frac{C_i}{(1+TIR)^i} - \\sum_{i=0}^{n} \\frac{P_i}{(1+TIR)^i} $$\n\nDonde:\n* $C_i$ son los cobros de cada periodo\n* $P_i$ son los pagos de cada periodo\n"
+    },
+    {
+        "role": "user",
+        "content": "Que es una preferente?"
+    },
+    {
+        "role": "assistant",
+        "content": "**\u26a0\ufe0f Aviso: Esta informaci\u00f3n no se encuentra en los apuntes oficiales de la asignatura. La siguiente respuesta se basa en conocimiento general y debes corroborarla.**\n\nLas acciones preferentes son un tipo de instrumento h\u00edbrido que combina caracter\u00edsticas de las acciones comunes y los bonos.  A diferencia de las acciones comunes, las preferentes generalmente ofrecen un dividendo fijo o variable, que se paga antes que los dividendos de las acciones comunes.  Adem\u00e1s, en caso de liquidaci\u00f3n de la empresa, los accionistas preferentes tienen prioridad sobre los comunes en el cobro de sus activos. Sin embargo, a diferencia de los bonos, el pago de dividendos de las acciones preferentes no est\u00e1 garantizado y puede ser suspendido por el consejo de administraci\u00f3n.  Adem\u00e1s, las preferentes no suelen tener derecho a voto en las juntas de accionistas, aunque algunas pueden adquirirlo en determinadas circunstancias.  Por \u00faltimo, cabe destacar que el valor de las acciones preferentes puede fluctuar en el mercado, al igual que el de las acciones comunes, aunque su volatilidad tiende a ser menor.\n"
+    }
+]

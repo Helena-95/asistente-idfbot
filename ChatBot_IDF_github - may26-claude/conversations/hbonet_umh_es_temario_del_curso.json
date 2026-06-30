@@ -1,0 +1,14 @@
+[
+    {
+        "role": "assistant",
+        "content": "Hola, he estudiado los res\u00famenes de los temas. \u00bfSobre qu\u00e9 tienes dudas?"
+    },
+    {
+        "role": "user",
+        "content": "\u00bfqu\u00e9 es TIR?"
+    },
+    {
+        "role": "assistant",
+        "content": "Seg\u00fan los apuntes de la asignatura, la **Tasa Interna de Rentabilidad (TIR)** se define de la siguiente manera:\n\nEn el **Tema 2**, se define como aquella tasa de actualizaci\u00f3n o de descuento ($r$) que hace que la rentabilidad absoluta neta de la inversi\u00f3n sea cero. En otras palabras, es la tasa de descuento que iguala el valor actual de la corriente de cobros con el valor actual de la corriente de pagos, es decir, **es la tasa para la cual el Valor Actual Neto (VAN) es cero**.\n\nAnal\u00edticamente, el criterio TIR se expresa como sigue:\n$$ 0 = -D + \\sum_{i=1}^{n} \\frac{F_i}{(1+TIR)^i} $$\nDonde:\n*   $D$ es el desembolso inicial.\n*   $F_i$ es el flujo neto de caja en el per\u00edodo $i$.\n*   $n$ es la vida del proyecto.\n\nDesde una perspectiva financiera, la TIR proporciona una medida de la **rentabilidad relativa bruta anual** por unidad monetaria comprometida en el proyecto.\n\nEl **Tema 4** a\u00f1ade una definici\u00f3n en el contexto de la renta fija: \"El TIR de un t\u00edtulo de renta fija se define como el tanto medio efectivo que iguala el valor actual de la corriente de pagos generada por tal t\u00edtulo con el precio del mismo\". Adem\u00e1s, aclara que la interpretaci\u00f3n de la TIR asume impl\u00edcitamente que los flujos generados ser\u00e1n reinvertidos a ese mismo tipo de inter\u00e9s.\n\n### Regla de decisi\u00f3n seg\u00fan la TIR\nLa decisi\u00f3n de inversi\u00f3n seg\u00fan el criterio TIR, compar\u00e1ndola con una tasa de corte o coste de capital ($k$) exigida por el inversor, es la siguiente:\n\n*   **Si $TIR > k$**: Se acepta el proyecto.\n*   **Si $TIR = k$**: Se rechaza el proyecto.\n*   **Si $TIR < k$**: Se rechaza el proyecto."
+    }
+]
