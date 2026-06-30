@@ -114,6 +114,8 @@ if "sub_mode" not in st.session_state:
 
 # Paso 1: Autenticación del usuario
 if not st.session_state.autenticado:
+    st.image("logo_amaia.png", width=300)
+    st.sidebar.image("logo_amaia.png", use_container_width=True)
     st.sidebar.title("Identificación")
     nombre_usuario = st.sidebar.text_input("Tu nombre")
     email_usuario = st.sidebar.text_input("Tu correo electrónico")
