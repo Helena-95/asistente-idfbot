@@ -16,7 +16,7 @@ st.set_page_config(
     page_title="Asistente del Curso",
     page_icon="🤖"
 )
-
+st.logo("logo_amaia.png", icon_image="logo_.png")
 # --- Configuración de la API de Gemini ---
 try:
     api_key = st.secrets["GEMINI_API_KEY"]
